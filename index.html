@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Interactive Photo Gallery</title>
+        <link rel="stylesheet" href="style.css" />
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                background-color: #f4f4f4;
+                padding: 20px;
+            }
+
+            #image {
+                width: 500px;
+                height: 350px;
+                border: 3px solid #333;
+                margin: 0 auto 20px;
+                background-color: #888;
+                background-size: cover;
+                background-position: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                color: #fff;
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Ensures text is readable over images */
+                font-weight: bold;
+                border-radius: 8px;
+                padding: 20px;
+            }
+
+            .thumbnails {
+                display: flex;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .preview {
+                width: 150px;
+                height: 100px;
+                object-fit: cover;
+                border: 3px solid transparent;
+                border-radius: 4px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                transition:
+                    transform 0.2s ease,
+                    border-color 0.2s ease;
+            }
+
+            .preview:hover {
+                transform: scale(1.05);
+                border-color: #333;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="image">Hover over an image below to display here.</div>
+
+        <div class="thumbnails">
+            <img
+                class="preview"
+                alt="A sleek modern sports wagon"
+                src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?auto=format&fit=crop&w=800&q=80"
+                onmouseover="upDate(this)"
+                onmouseout="unDo()"
+            />
+
+            <img
+                class="preview"
+                alt="A vast landscape in Zhetysu"
+                src="https://t3.ftcdn.net/jpg/07/11/85/40/360_F_711854015_HPMxy1bpVGa5G7o6nsNHN45VFLa28YQg.jpg"
+                onmouseover="upDate(this)"
+                onmouseout="unDo()"
+            />
+
+            <img
+                class="preview"
+                alt="A chalkboard full of calculus and probability equations"
+                src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=800&q=80"
+                onmouseover="upDate(this)"
+                onmouseout="unDo()"
+            />
+        </div>
+
+        <script>
+            function upDate(previewPic) {
+                // 1. Console.log to check that the event is triggering
+                console.log("Event triggered: upDate function is running!");
+
+                // 2. Print out information about the previewPic variable
+                console.log("Image Alt Text:", previewPic.alt);
+                console.log("Image Source URL:", previewPic.src);
+
+                // 3 & 4. Select the element with the id 'image'
+                let imageDiv = document.getElementById("image");
+
+                // Change the text of the element
+                imageDiv.innerHTML = previewPic.alt;
+
+                // Change the background image of the element
+                imageDiv.style.backgroundImage =
+                    "url('" + previewPic.src + "')";
+            }
+
+            function unDo() {
+                // Console log to verify the undo event is triggering
+                console.log("Event triggered: unDo function is running!");
+
+                // 5. Select the element with the id 'image'
+                let imageDiv = document.getElementById("image");
+
+                // Update the url for the background image back to the original value
+                imageDiv.style.backgroundImage = "url('')";
+
+                // 6. Update the text back to the original text
+                imageDiv.innerHTML =
+                    "Hover over an image below to display here.";
+            }
+        </script>
+    </body>
+</html>
